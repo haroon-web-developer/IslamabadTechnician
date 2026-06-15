@@ -1,0 +1,64 @@
+{
+  "entities": {
+    "Service": {
+      "title": "Service",
+      "description": "Represents a home maintenance service.",
+      "type": "object",
+      "properties": {
+        "categoryId": {
+          "type": "string",
+          "description": "The category of the service (e.g. ac-services)"
+        },
+        "title": {
+          "type": "string",
+          "description": "Name of the service"
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the service"
+        },
+        "price": {
+          "type": "number",
+          "description": "Normal price of the service"
+        },
+        "discountPrice": {
+          "type": "number",
+          "description": "Discounted price of the service if any"
+        },
+        "rating": {
+          "type": "number",
+          "description": "User rating"
+        },
+        "isTrendy": {
+          "type": "boolean",
+          "description": "Whether the service is trendy"
+        },
+        "isSeasonal": {
+          "type": "boolean",
+          "description": "Whether the service is seasonal"
+        },
+        "showOnHome": {
+          "type": "boolean",
+          "description": "Whether to display on home"
+        },
+        "slug": {
+          "type": "string",
+          "description": "URL slug for the service"
+        },
+        "imageUrl": {
+          "type": "string",
+          "description": "URL of the image for the service"
+        }
+      },
+      "required": ["title", "description", "price", "rating", "slug"]
+    }
+  },
+  "firestore": {
+    "services/{serviceId}": {
+      "schema": {
+        "$ref": "#/entities/Service"
+      },
+      "description": "A collection of services."
+    }
+  }
+}

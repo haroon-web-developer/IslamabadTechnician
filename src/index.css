@@ -1,0 +1,71 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #172e3e;
+  --color-primary-light: #28597c;
+  --color-accent: #e0b462;
+  
+  /* Brand Navy (replaces default blue) */
+  --color-blue-50: #f0f5f9;
+  --color-blue-100: #dbe8f1;
+  --color-blue-200: #bbd2e2;
+  --color-blue-300: #8cb5ce;
+  --color-blue-400: #5890b3;
+  --color-blue-500: #39749a;
+  --color-blue-600: #28597c;
+  --color-blue-700: #172e3e; /* Base Navy */
+  --color-blue-800: #1d3648;
+  --color-blue-900: #1d2e3c;
+  --color-blue-950: #131e28;
+
+  /* Brand Gold (replaces default sky) */
+  --color-sky-50: #fbf8f2;
+  --color-sky-100: #f5eee0;
+  --color-sky-200: #ebdab3;
+  --color-sky-300: #e6c382;
+  --color-sky-400: #e0b462; /* Base Gold */
+  --color-sky-500: #cf9a41;
+  --color-sky-600: #b57f31;
+  --color-sky-700: #916127;
+  --color-sky-800: #7a5024;
+  --color-sky-900: #654121;
+  --color-sky-950: #3a220e;
+
+  --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: #f8fafc;
+  color: #0f172a;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  @apply font-bold tracking-tight text-slate-900;
+}
+
+h1 {
+  @apply text-4xl md:text-5xl lg:text-6xl leading-[1.15];
+}
+
+h2 {
+  @apply text-3xl md:text-4xl;
+}
+
+h3 {
+  @apply text-xl md:text-2xl;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
