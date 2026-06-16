@@ -13,8 +13,8 @@ const firebaseConfig = {
   authDomain: sanitize((import.meta as any).env.VITE_FIREBASE_AUTH_DOMAIN) || "islamabadtechnician-e8a44.firebaseapp.com",
   projectId: sanitize((import.meta as any).env.VITE_FIREBASE_PROJECT_ID) || "islamabadtechnician-e8a44",
   storageBucket: sanitize((import.meta as any).env.VITE_FIREBASE_STORAGE_BUCKET) || "islamabadtechnician-e8a44.firebasestorage.app",
-  messagingSenderId: sanitize((import.meta as any).env.VITE_FIREBASE_MESSAGING_SENDER_ID) || "169024688662",
-  appId: sanitize((import.meta as any).env.VITE_FIREBASE_APP_ID) || "1:169024688662:web:4fdce0530ca5001f919b37",
+  messagingSenderId: sanitize((import.meta as any).env.VITE_FIREBASE_MESSAGING_SENDER_ID),
+  appId: sanitize((import.meta as any).env.VITE_FIREBASE_APP_ID)
 };
 
 console.log(`🔥 Connected to Custom Firebase Project: ${firebaseConfig.projectId}`);
