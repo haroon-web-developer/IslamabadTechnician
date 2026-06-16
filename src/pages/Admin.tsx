@@ -185,6 +185,7 @@ export default function AdminServices() {
     const uploadFormData = new FormData();
     uploadFormData.append('file', file);
     uploadFormData.append('upload_preset', uploadPreset);
+    uploadFormData.append('folder', 'IslamabadTechnician');
 
     try {
       const response = await fetch(`https://api.cloudinary.com/v1_1/${cloudName}/image/upload`, {
