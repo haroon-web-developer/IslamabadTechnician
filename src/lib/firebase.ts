@@ -3,25 +3,28 @@ import { getAuth } from "firebase/auth";
 import { getFirestore, enableIndexedDbPersistence } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 
-const env = (import.meta as any).env;
-
-const firebaseConfig = {
-  apiKey: env.VITE_FIREBASE_API_KEY,
-  authDomain: env.VITE_FIREBASE_AUTH_DOMAIN,
-  projectId: env.VITE_FIREBASE_PROJECT_ID,
-  storageBucket: env.VITE_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: env.VITE_FIREBASE_MESSAGING_SENDER_ID,
-  appId: env.VITE_FIREBASE_APP_ID
+const sanitize = (val: string | undefined | boolean) => {
+  if (!val || typeof val !== 'string') return val as string;
+  return val.replace(/,$/, '').replace(/^["']/, '').replace(/["']$/, '').trim();
 };
 
-console.log(`🔥 Connected to Firebase Project: ${firebaseConfig.projectId}`);
+const firebaseConfig = {
+  apiKey: sanitize((import.meta as any).env.VITE_FIREBASE_API_KEY),
+  authDomain: sanitize((import.meta as any).env.VITE_FIREBASE_AUTH_DOMAIN) || "islamabadtechnician-e8a44.firebaseapp.com",
+  projectId: sanitize((import.meta as any).env.VITE_FIREBASE_PROJECT_ID) || "islamabadtechnician-e8a44",
+  storageBucket: sanitize((import.meta as any).env.VITE_FIREBASE_STORAGE_BUCKET) || "islamabadtechnician-e8a44.firebasestorage.app",
+  messagingSenderId: sanitize((import.meta as any).env.VITE_FIREBASE_MESSAGING_SENDER_ID) || "169024688662",
+  appId: sanitize((import.meta as any).env.VITE_FIREBASE_APP_ID) || "1:169024688662:web:4fdce0530ca5001f919b37",
+};
+
+console.log(`🔥 Connected to Custom Firebase Project: ${firebaseConfig.projectId}`);
 
 export const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
 
 // Enable offline persistence to speed up initial loads
 try {
-  enableIndexedDbPersistence(db).catch((err) => {
+  enableIndexedDbPersistence(db).catch((err: any) => {
     if (err.code == 'failed-precondition') {
       console.warn("Multiple tabs open, persistence can only be enabled in one tab at a a time.");
     } else if (err.code == 'unimplemented') {

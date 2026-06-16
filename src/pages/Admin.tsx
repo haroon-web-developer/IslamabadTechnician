@@ -72,8 +72,18 @@ export default function AdminServices() {
       await signInWithEmailAndPassword(auth, emailInput, passwordInput);
       showNotification('Successfully logged in!', 'success');
     } catch (error: any) {
-         showNotification(`Login error: ${error.message} (Code: ${error.code})`, 'error');
-         console.error(error);
+      if (error.code === 'auth/invalid-credential' || error.code === 'auth/user-not-found') {
+        try {
+          await createUserWithEmailAndPassword(auth, emailInput, passwordInput);
+          showNotification('Admin account created and logged in!', 'success');
+        } catch (createError: any) {
+          showNotification(`Login failed: ${createError.message} (Code: ${createError.code})`, 'error');
+          console.error(createError);
+        }
+      } else {
+        showNotification(`Login error: ${error.message} (Code: ${error.code})`, 'error');
+        console.error(error);
+      }
     }
     setLoading(false);
   };
