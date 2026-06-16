@@ -3,16 +3,18 @@ import { getAuth } from "firebase/auth";
 import { getFirestore, enableIndexedDbPersistence } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 
+const env = (import.meta as any).env;
+
 const firebaseConfig = {
-  apiKey: import.meta.env.VITE_FIREBASE_API_KEY || "AIzaSyA3jlU7WJaTKc1cOn7KOjD5J_9xDCkDGfM",
-  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN || "islamabadtechnician-e8a44.firebaseapp.com",
-  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID || "islamabadtechnician-e8a44",
-  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET || "islamabadtechnician-e8a44.firebasestorage.app",
-  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID || "169024688662",
-  appId: import.meta.env.VITE_FIREBASE_APP_ID || "1:169024688662:web:4fdce0530ca5001f919b37"
+  apiKey: env.VITE_FIREBASE_API_KEY,
+  authDomain: env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: env.VITE_FIREBASE_APP_ID
 };
 
-console.log(`🔥 Connected to Custom Firebase Project: ${firebaseConfig.projectId}`);
+console.log(`🔥 Connected to Firebase Project: ${firebaseConfig.projectId}`);
 
 export const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);

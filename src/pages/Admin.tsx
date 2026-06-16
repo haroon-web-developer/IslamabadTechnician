@@ -72,18 +72,8 @@ export default function AdminServices() {
       await signInWithEmailAndPassword(auth, emailInput, passwordInput);
       showNotification('Successfully logged in!', 'success');
     } catch (error: any) {
-      if (error.code === 'auth/user-not-found' || error.code === 'auth/invalid-credential') {
-        try {
-          await createUserWithEmailAndPassword(auth, emailInput, passwordInput);
-          showNotification('Admin account created and logged in!', 'success');
-        } catch (createError: any) {
-            showNotification('Login failed. Please ensure Email/Password auth is enabled in Firebase Console.', 'error');
-            console.error(createError);
-        }
-      } else {
-         showNotification('Login failed: ' + error.message, 'error');
+         showNotification(`Login error: ${error.message} (Code: ${error.code})`, 'error');
          console.error(error);
-      }
     }
     setLoading(false);
   };
@@ -484,7 +474,7 @@ export default function AdminServices() {
                   className="flex-1 bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 focus:bg-white focus:ring-2 focus:ring-blue-600 focus:border-transparent outline-none transition-all text-sm"
                   placeholder="https://example.com/image.jpg"
                 />
-                <div className="relative flex-shrink-0">
+                <div className="relative shrink-0">
                   <input
                     type="file"
                     accept="image/*"
