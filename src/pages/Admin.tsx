@@ -77,7 +77,11 @@ export default function AdminServices() {
           await createUserWithEmailAndPassword(auth, emailInput, passwordInput);
           showNotification('Admin account created and logged in!', 'success');
         } catch (createError: any) {
-          showNotification(`Login failed: ${createError.message} (Code: ${createError.code})`, 'error');
+          if (createError.code === 'auth/email-already-in-use') {
+            showNotification('Incorrect password! That email is already registered.', 'error');
+          } else {
+            showNotification(`Login failed: ${createError.message} (Code: ${createError.code})`, 'error');
+          }
           console.error(createError);
         }
       } else {
