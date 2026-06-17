@@ -1,16 +1,44 @@
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import { ArrowRight, Star, Settings } from 'lucide-react';
+import { ArrowRight, Star } from 'lucide-react';
 import { ServiceItem } from '../../pages/Admin';
+import { CategoryItem } from '../../components/admin/AdminCategories';
 import { collection, onSnapshot } from 'firebase/firestore';
 import { db } from '../../lib/firebase';
+import { services as defaultCategories } from '../../data/content';
 
 export default function ServicesSection({ showHomeOnly = false }: { showHomeOnly?: boolean }) {
   const [servicesList, setServicesList] = useState<ServiceItem[]>([]);
+  const [categories, setCategories] = useState<CategoryItem[]>([]);
+  const [activeCategory, setActiveCategory] = useState<string>('all');
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const unsubscribe = onSnapshot(collection(db, 'services'), (snapshot) => {
+    // Fetch categories
+    const unsubCategories = onSnapshot(collection(db, 'categories'), (snapshot) => {
+      const list: CategoryItem[] = [];
+      snapshot.forEach(doc => {
+        list.push({ id: doc.id, ...doc.data() } as CategoryItem);
+      });
+      
+      // Sort to match order in content.ts
+      list.sort((a, b) => {
+        const indexA = defaultCategories.findIndex(c => c.slug === a.slug || c.title === a.title);
+        const indexB = defaultCategories.findIndex(c => c.slug === b.slug || c.title === b.title);
+        
+        if (indexA !== -1 && indexB !== -1) return indexA - indexB;
+        if (indexA !== -1) return -1;
+        if (indexB !== -1) return 1;
+        return a.title.localeCompare(b.title);
+      });
+      
+      setCategories(list);
+    }, (error) => {
+      console.error("Error fetching categories:", error);
+    });
+
+    // Fetch services
+    const unsubServices = onSnapshot(collection(db, 'services'), (snapshot) => {
       const list: ServiceItem[] = [];
       snapshot.forEach(doc => {
         list.push({ id: doc.id, ...doc.data() } as ServiceItem);
@@ -21,15 +49,18 @@ export default function ServicesSection({ showHomeOnly = false }: { showHomeOnly
       console.error("Error fetching services:", error);
       setLoading(false);
     });
-    return () => unsubscribe();
+
+    return () => {
+      unsubCategories();
+      unsubServices();
+    };
   }, []);
 
-  // Sort: Trendy or Seasonal on top
-  const sortedServices = [...servicesList]
+  // Filter and Sort
+  const filteredAndSortedServices = [...servicesList]
     .filter(service => {
-      if (showHomeOnly) {
-        return service.showOnHome !== false;
-      }
+      if (showHomeOnly && service.showOnHome === false) return false;
+      if (activeCategory !== 'all' && service.categoryId !== activeCategory) return false;
       return true;
     })
     .sort((a, b) => {
@@ -53,16 +84,44 @@ export default function ServicesSection({ showHomeOnly = false }: { showHomeOnly
           </p>
         </div>
 
+        {/* Category Filter Pills */}
+        <div className="flex flex-wrap justify-center gap-2 mb-8">
+          <button
+            onClick={() => setActiveCategory('all')}
+            className={`px-5 py-2.5 rounded-full text-sm font-semibold transition-all shadow-sm ${
+              activeCategory === 'all'
+                ? 'bg-blue-600 text-white'
+                : 'bg-white text-slate-600 hover:bg-slate-100 border border-slate-200'
+            }`}
+          >
+            All Services
+          </button>
+          
+          {categories.map((category) => (
+            <button
+              key={category.id}
+              onClick={() => setActiveCategory(category.id)}
+              className={`px-5 py-2.5 rounded-full text-sm font-semibold transition-all shadow-sm ${
+                activeCategory === category.id
+                  ? 'bg-blue-600 text-white'
+                  : 'bg-white text-slate-600 hover:bg-slate-100 border border-slate-200'
+              }`}
+            >
+              {category.title}
+            </button>
+          ))}
+        </div>
+
         {loading ? (
           <div className="text-center py-12 text-slate-500 font-bold">Loading Services...</div>
-        ) : sortedServices.length === 0 ? (
+        ) : filteredAndSortedServices.length === 0 ? (
           <div className="text-center py-12 bg-white rounded-2xl border border-slate-100 shadow-sm">
             <h3 className="text-xl font-bold text-slate-900 mb-2">No Services Available</h3>
-            <p className="text-slate-500">We are currently updating our service offerings. Please check back later.</p>
+            <p className="text-slate-500">We couldn't find any services in this category.</p>
           </div>
         ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 lg:gap-8 max-w-7xl mx-auto">
-          {sortedServices.map((service, idx) => (
+          {filteredAndSortedServices.map((service, idx) => (
             <Link 
               to={`/service/${service.slug}`}
               key={service.id}
