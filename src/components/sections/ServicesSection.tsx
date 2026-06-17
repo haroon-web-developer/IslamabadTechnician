@@ -100,9 +100,9 @@ export default function ServicesSection({ showHomeOnly = false }: { showHomeOnly
           {categories.map((category) => (
             <button
               key={category.id}
-              onClick={() => setActiveCategory(category.id)}
+              onClick={() => setActiveCategory(category.slug)}
               className={`px-5 py-2.5 rounded-full text-sm font-semibold transition-all shadow-sm ${
-                activeCategory === category.id
+                activeCategory === category.slug
                   ? 'bg-blue-600 text-white'
                   : 'bg-white text-slate-600 hover:bg-slate-100 border border-slate-200'
               }`}
