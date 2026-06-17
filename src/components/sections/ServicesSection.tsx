@@ -139,8 +139,8 @@ export default function ServicesSection({ showHomeOnly = false }: { showHomeOnly
               )}
               
               {/* Dark Gradient Overlay for optimal text readability on both light and dark images */}
-              <div className="absolute inset-0 bg-black/30 z-10 group-hover:bg-black/40 transition-colors duration-500"></div>
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-950 flex via-slate-900/80 to-transparent z-10"></div>
+              <div className="absolute inset-0 bg-black/40 z-10 group-hover:bg-black/50 transition-colors duration-500"></div>
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-900/80 to-transparent z-10"></div>
                 
               {/* Badges - positioned professionally at top right */}
               {(service.isTrendy || service.isSeasonal) && (
@@ -152,15 +152,16 @@ export default function ServicesSection({ showHomeOnly = false }: { showHomeOnly
               
               {/* Content Section */}
               <div className="relative z-20 p-5 flex flex-col h-full justify-end">
-                <h4 className="text-white font-bold text-xl mb-1.5 leading-tight group-hover:text-sky-300 transition-colors drop-shadow-lg">
-                  {service.title}
-                </h4>
-                
-                <p className="text-slate-200 text-sm leading-relaxed mb-4 line-clamp-2 drop-shadow-md font-medium">
-                  {service.description}
-                </p>
-                
-                <div className="flex items-center justify-between mt-auto pt-4 border-t border-white/20">
+                <div className="mt-auto">
+                  <div className="text-white font-bold text-xl mb-1.5 leading-tight group-hover:text-sky-300 transition-colors drop-shadow-lg" style={{ color: '#ffffff' }}>
+                    {service.title}
+                  </div>
+                  
+                  <p className="text-slate-100 text-sm leading-relaxed mb-4 line-clamp-2 drop-shadow-md font-medium" style={{ color: '#f1f5f9' }}>
+                    {service.description}
+                  </p>
+                  
+                  <div className="flex items-center justify-between pt-4 border-t border-white/20">
                   <div className="flex flex-col">
                     <div className="flex items-center gap-2 mb-1">
                       {service.discountPrice ? (
@@ -180,6 +181,7 @@ export default function ServicesSection({ showHomeOnly = false }: { showHomeOnly
                   <div className="flex items-center justify-center w-8 h-8 bg-white/10 backdrop-blur-sm text-white rounded-full group-hover:bg-blue-600 group-hover:text-white transition-colors shadow-sm shrink-0 border border-white/10">
                     <ArrowRight className="w-4 h-4" />
                   </div>
+                </div>
                 </div>
               </div>
             </Link>
