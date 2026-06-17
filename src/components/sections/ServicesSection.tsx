@@ -138,28 +138,29 @@ export default function ServicesSection({ showHomeOnly = false }: { showHomeOnly
                 <div className="absolute inset-0 w-full h-full bg-slate-800 z-0 group-hover:scale-105 transition-transform duration-700"></div>
               )}
               
-              {/* Dark Gradient Overlay for optimal text readability */}
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/95 via-slate-900/60 to-slate-900/20 z-10"></div>
+              {/* Dark Gradient Overlay for optimal text readability on both light and dark images */}
+              <div className="absolute inset-0 bg-black/30 z-10 group-hover:bg-black/40 transition-colors duration-500"></div>
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-950 flex via-slate-900/80 to-transparent z-10"></div>
                 
               {/* Badges - positioned professionally at top right */}
               {(service.isTrendy || service.isSeasonal) && (
                 <div className="absolute top-4 right-4 flex gap-1.5 z-20">
-                  {service.isTrendy && <span className="bg-rose-500/90 backdrop-blur-md text-white text-[10px] uppercase tracking-wider font-extrabold px-2.5 py-1.5 rounded-lg shadow-sm border border-rose-400/30">Popular</span>}
-                  {service.isSeasonal && <span className="bg-sky-500/90 backdrop-blur-md text-white text-[10px] uppercase tracking-wider font-extrabold px-2.5 py-1.5 rounded-lg shadow-sm border border-sky-400/30">Seasonal</span>}
+                  {service.isTrendy && <span className="bg-rose-500 text-white text-[10px] uppercase tracking-wider font-extrabold px-2.5 py-1.5 rounded-lg shadow-lg">Popular</span>}
+                  {service.isSeasonal && <span className="bg-sky-500 text-white text-[10px] uppercase tracking-wider font-extrabold px-2.5 py-1.5 rounded-lg shadow-lg">Seasonal</span>}
                 </div>
               )}
               
               {/* Content Section */}
               <div className="relative z-20 p-5 flex flex-col h-full justify-end">
-                <h4 className="text-white font-bold text-lg lg:text-xl mb-1.5 leading-tight group-hover:text-blue-400 transition-colors">
+                <h4 className="text-white font-bold text-xl mb-1.5 leading-tight group-hover:text-sky-300 transition-colors drop-shadow-lg">
                   {service.title}
                 </h4>
                 
-                <p className="text-slate-300 text-sm leading-relaxed mb-4 line-clamp-2">
+                <p className="text-slate-200 text-sm leading-relaxed mb-4 line-clamp-2 drop-shadow-md font-medium">
                   {service.description}
                 </p>
                 
-                <div className="flex items-center justify-between mt-auto pt-4 border-t border-white/10">
+                <div className="flex items-center justify-between mt-auto pt-4 border-t border-white/20">
                   <div className="flex flex-col">
                     <div className="flex items-center gap-2 mb-1">
                       {service.discountPrice ? (
