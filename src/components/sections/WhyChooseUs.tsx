@@ -40,15 +40,15 @@ export default function WhyChooseUs() {
 
             {/* Visual Grid */}
             <div className="grid grid-cols-2 gap-4 sm:gap-6 relative z-10 w-full bg-white p-4 sm:p-6 rounded-3xl shadow-xl border border-slate-100">
-              <img
-                src="public\whychoseus-1.jpg"
-                alt="AC Repairing"
+              <img 
+                src="public\whychoseus-1.jpg" 
+                alt="AC Repairing" 
                 loading="lazy"
                 className="w-full h-48 sm:h-72 object-cover rounded-2xl shadow-sm"
               />
-              <img
-                src="public\whychoseus-2.jpg"
-                alt="Electrician Fixing"
+              <img 
+                src="public\whychoseus-2.jpg" 
+                alt="Electrician Fixing" 
                 loading="lazy"
                 className="w-full h-48 sm:h-72 object-cover rounded-2xl shadow-sm translate-y-8"
               />
