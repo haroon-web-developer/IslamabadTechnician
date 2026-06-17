@@ -125,7 +125,7 @@ export default function ServicesSection({ showHomeOnly = false }: { showHomeOnly
             <Link 
               to={`/service/${service.slug}`}
               key={service.id}
-              className="group relative overflow-hidden rounded-2xl min-h-[260px] shadow-md hover:shadow-xl transition-all duration-500 cursor-pointer isolate flex flex-col justify-end"
+              className="group relative overflow-hidden rounded-2xl h-[220px] shadow-md hover:shadow-2xl transition-all duration-500 cursor-pointer isolate flex flex-col justify-end"
             >
               {service.imageUrl ? (
                 <img
@@ -138,50 +138,44 @@ export default function ServicesSection({ showHomeOnly = false }: { showHomeOnly
                 <div className="absolute inset-0 w-full h-full bg-slate-800 z-0 group-hover:scale-105 transition-transform duration-700"></div>
               )}
               
-              {/* Dark Gradient Overlay for optimal text readability on both light and dark images */}
-              <div className="absolute inset-0 bg-black/40 z-10 group-hover:bg-black/50 transition-colors duration-500"></div>
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-900/80 to-transparent z-10"></div>
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/60 to-transparent z-10"></div>
                 
-              {/* Badges - positioned professionally at top right */}
               {(service.isTrendy || service.isSeasonal) && (
                 <div className="absolute top-4 right-4 flex gap-1.5 z-20">
-                  {service.isTrendy && <span className="bg-rose-500 text-white text-[10px] uppercase tracking-wider font-extrabold px-2.5 py-1.5 rounded-lg shadow-lg">Popular</span>}
-                  {service.isSeasonal && <span className="bg-sky-500 text-white text-[10px] uppercase tracking-wider font-extrabold px-2.5 py-1.5 rounded-lg shadow-lg">Seasonal</span>}
+                  {service.isTrendy && <span className="bg-rose-500 text-white text-[10px] uppercase tracking-wider font-bold px-2 py-1 rounded shadow-sm">Popular</span>}
+                  {service.isSeasonal && <span className="bg-sky-500 text-white text-[10px] uppercase tracking-wider font-bold px-2 py-1 rounded shadow-sm">Seasonal</span>}
                 </div>
               )}
               
-              {/* Content Section */}
               <div className="relative z-20 p-5 flex flex-col h-full justify-end">
-                <div className="mt-auto">
-                  <div className="text-white font-bold text-xl mb-1.5 leading-tight group-hover:text-sky-300 transition-colors drop-shadow-lg" style={{ color: '#ffffff' }}>
-                    {service.title}
-                  </div>
-                  
-                  <p className="text-slate-100 text-sm leading-relaxed mb-4 line-clamp-2 drop-shadow-md font-medium" style={{ color: '#f1f5f9' }}>
-                    {service.description}
-                  </p>
-                  
-                  <div className="flex items-center justify-between pt-4 border-t border-white/20">
+                <h4 className="text-white font-bold text-lg lg:text-xl mb-1.5 leading-tight">
+                  {service.title}
+                </h4>
+                
+                <p className="text-slate-300 text-xs leading-relaxed mb-4 line-clamp-2">
+                  {service.description}
+                </p>
+                
+                <div className="flex items-center justify-between mt-auto pt-3 border-t border-white/10">
                   <div className="flex flex-col">
                     <div className="flex items-center gap-2 mb-1">
                       {service.discountPrice ? (
                         <>
                           <span className="text-xs text-slate-400 line-through font-medium">Rs.{service.discountPrice}</span>
-                          <span className="text-lg font-black text-white">Rs.{service.price}</span>
+                          <span className="text-xl font-black text-white">Rs.{service.price}</span>
                         </>
                       ) : (
-                        <span className="text-lg font-black text-white">Rs.{service.price}</span>
+                        <span className="text-xl font-black text-white">Rs.{service.price}</span>
                       )}
                     </div>
                     <div className="flex items-center gap-1 text-xs font-bold text-yellow-400">
-                      <Star className="w-4 h-4 fill-current" /> {service.rating}
+                      <Star className="w-3.5 h-3.5 fill-current" /> {service.rating}
                     </div>
                   </div>
                   
-                  <div className="flex items-center justify-center w-8 h-8 bg-white/10 backdrop-blur-sm text-white rounded-full group-hover:bg-blue-600 group-hover:text-white transition-colors shadow-sm shrink-0 border border-white/10">
+                  <div className="flex items-center justify-center w-8 h-8 bg-white/10 backdrop-blur-sm text-white rounded-full group-hover:bg-white group-hover:text-blue-900 transition-all shadow-sm">
                     <ArrowRight className="w-4 h-4" />
                   </div>
-                </div>
                 </div>
               </div>
             </Link>
