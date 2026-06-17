@@ -125,55 +125,60 @@ export default function ServicesSection({ showHomeOnly = false }: { showHomeOnly
             <Link 
               to={`/service/${service.slug}`}
               key={service.id}
-              className="group relative overflow-hidden rounded-2xl h-[220px] shadow-md hover:shadow-2xl transition-all duration-500 cursor-pointer isolate flex flex-col justify-end"
+              className="group relative flex flex-col bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-100 overflow-hidden"
             >
-              {service.imageUrl ? (
-                <img
-                  src={service.imageUrl}
-                  alt={service.title}
-                  className="absolute inset-0 w-full h-full object-cover z-0 group-hover:scale-105 transition-transform duration-700"
-                  referrerPolicy="no-referrer"
-                />
-              ) : (
-                <div className="absolute inset-0 w-full h-full bg-slate-800 z-0 group-hover:scale-105 transition-transform duration-700"></div>
-              )}
-              
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/60 to-transparent z-10"></div>
+              {/* Image Section */}
+              <div className="relative h-48 w-full overflow-hidden bg-slate-100 shrink-0">
+                {service.imageUrl ? (
+                  <img
+                    src={service.imageUrl}
+                    alt={service.title}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                    referrerPolicy="no-referrer"
+                  />
+                ) : (
+                  <div className="w-full h-full bg-slate-800 flex items-center justify-center">
+                    <span className="text-slate-600 text-sm font-medium">No Image</span>
+                  </div>
+                )}
                 
-              {(service.isTrendy || service.isSeasonal) && (
-                <div className="absolute top-4 right-4 flex gap-1.5 z-20">
-                  {service.isTrendy && <span className="bg-rose-500 text-white text-[10px] uppercase tracking-wider font-bold px-2 py-1 rounded shadow-sm">Popular</span>}
-                  {service.isSeasonal && <span className="bg-sky-500 text-white text-[10px] uppercase tracking-wider font-bold px-2 py-1 rounded shadow-sm">Seasonal</span>}
-                </div>
-              )}
+                {/* Badges */}
+                {(service.isTrendy || service.isSeasonal) && (
+                  <div className="absolute top-3 left-3 flex gap-1.5 z-20">
+                    {service.isTrendy && <span className="bg-rose-500 text-white text-[10px] uppercase tracking-wider font-bold px-2.5 py-1 rounded shadow-md">Popular</span>}
+                    {service.isSeasonal && <span className="bg-sky-500 text-white text-[10px] uppercase tracking-wider font-bold px-2.5 py-1 rounded shadow-md">Seasonal</span>}
+                  </div>
+                )}
+              </div>
               
-              <div className="relative z-20 p-5 flex flex-col h-full justify-end">
-                <h4 className="text-white font-bold text-lg lg:text-xl mb-1.5 leading-tight">
+              {/* Content Section */}
+              <div className="p-5 flex flex-col flex-1">
+                <h4 className="text-slate-900 font-bold text-lg mb-2 leading-tight group-hover:text-blue-600 transition-colors">
                   {service.title}
                 </h4>
                 
-                <p className="text-slate-300 text-xs leading-relaxed mb-4 line-clamp-2">
+                <p className="text-slate-500 text-sm leading-relaxed mb-4 line-clamp-2">
                   {service.description}
                 </p>
                 
-                <div className="flex items-center justify-between mt-auto pt-3 border-t border-white/10">
+                <div className="flex items-center justify-between mt-auto pt-4 border-t border-slate-100">
                   <div className="flex flex-col">
                     <div className="flex items-center gap-2 mb-1">
                       {service.discountPrice ? (
                         <>
                           <span className="text-xs text-slate-400 line-through font-medium">Rs.{service.discountPrice}</span>
-                          <span className="text-xl font-black text-white">Rs.{service.price}</span>
+                          <span className="text-lg font-black text-slate-900">Rs.{service.price}</span>
                         </>
                       ) : (
-                        <span className="text-xl font-black text-white">Rs.{service.price}</span>
+                        <span className="text-lg font-black text-slate-900">Rs.{service.price}</span>
                       )}
                     </div>
-                    <div className="flex items-center gap-1 text-xs font-bold text-yellow-400">
-                      <Star className="w-3.5 h-3.5 fill-current" /> {service.rating}
+                    <div className="flex items-center gap-1 text-xs font-bold text-yellow-500">
+                      <Star className="w-4 h-4 fill-current" /> {service.rating}
                     </div>
                   </div>
                   
-                  <div className="flex items-center justify-center w-8 h-8 bg-white/10 backdrop-blur-sm text-white rounded-full group-hover:bg-white group-hover:text-blue-900 transition-all shadow-sm">
+                  <div className="flex items-center justify-center w-8 h-8 bg-slate-50 text-slate-400 rounded-full group-hover:bg-blue-600 group-hover:text-white transition-colors shadow-sm shrink-0">
                     <ArrowRight className="w-4 h-4" />
                   </div>
                 </div>
