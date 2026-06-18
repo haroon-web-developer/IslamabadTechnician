@@ -41,13 +41,13 @@ export default function WhyChooseUs() {
             {/* Visual Grid */}
             <div className="grid grid-cols-2 gap-4 sm:gap-6 relative z-10 w-full bg-white p-4 sm:p-6 rounded-3xl shadow-xl border border-slate-100">
               <img 
-                src="public\whychoseus-1.jpg" 
+                src="https://res.cloudinary.com/dmzoiq7yg/image/upload/v1781722473/IslamabadTechnician/xe8ozfctaoinheltxiel.png" 
                 alt="AC Repairing" 
                 loading="lazy"
                 className="w-full h-48 sm:h-72 object-cover rounded-2xl shadow-sm"
               />
               <img 
-                src="public\whychoseus-2.jpg" 
+                src="https://images.pexels.com/photos/33694019/pexels-photo-33694019.jpeg?auto=compress&cs=tinysrgb&w=600" 
                 alt="Electrician Fixing" 
                 loading="lazy"
                 className="w-full h-48 sm:h-72 object-cover rounded-2xl shadow-sm translate-y-8"
