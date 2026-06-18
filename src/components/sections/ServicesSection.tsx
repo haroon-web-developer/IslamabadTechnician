@@ -125,7 +125,7 @@ export default function ServicesSection({ showHomeOnly = false }: { showHomeOnly
             <Link 
               to={`/service/${service.slug}`}
               key={service.id}
-              className="group relative overflow-hidden rounded-2xl h-[220px] shadow-md hover:shadow-2xl transition-all duration-500 cursor-pointer isolate flex flex-col justify-end"
+              className="group relative overflow-hidden rounded-2xl h-55 shadow-md hover:shadow-2xl transition-all duration-500 cursor-pointer isolate flex flex-col justify-end"
             >
               {service.imageUrl ? (
                 <img
@@ -138,7 +138,7 @@ export default function ServicesSection({ showHomeOnly = false }: { showHomeOnly
                 <div className="absolute inset-0 w-full h-full bg-slate-800 z-0 group-hover:scale-105 transition-transform duration-700"></div>
               )}
               
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/60 to-transparent z-10"></div>
+              <div className="absolute inset-0 bg-linear-to-t from-slate-900 via-slate-900/60 to-transparent z-10"></div>
                 
               {(service.isTrendy || service.isSeasonal) && (
                 <div className="absolute top-4 right-4 flex gap-1.5 z-20">
