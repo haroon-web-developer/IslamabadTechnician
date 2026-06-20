@@ -177,63 +177,62 @@ export default function CategoryDetail() {
                 <Link 
                   to={`/service/${service.slug}`}
                   key={service.id}
-                  className="group flex flex-col bg-white rounded-2xl overflow-hidden shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.12)] hover:-translate-y-1 transition-all duration-300 border border-slate-100"
+                  className="group relative flex flex-col rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 border border-slate-200/20 w-full min-h-[180px] sm:min-h-[220px]"
                 >
-                  {/* Image Section */}
-                  <div className="relative h-56 w-full overflow-hidden shrink-0 bg-slate-100">
+                  <div className="absolute inset-0 w-full h-full z-0 overflow-hidden bg-slate-900">
                     {service.imageUrl ? (
                       <img
                         src={service.imageUrl}
                         alt={service.title}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                        className="w-full h-full object-cover opacity-60 group-hover:scale-110 transition-transform duration-700"
                         referrerPolicy="no-referrer"
                       />
                     ) : (
-                      <div className="w-full h-full bg-slate-200"></div>
+                      <div className="w-full h-full bg-slate-800"></div>
                     )}
-                    
-                    {/* Overlay gradient for image (optional, just for top edge if we wanted) */}
-                    <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/20 to-transparent z-0"></div>
-                      
-                    {/* Badges - positioned professionally at top right */}
-                    {(service.isTrendy || service.isSeasonal) && (
-                      <div className="absolute top-4 right-4 flex gap-2 z-10">
-                        {service.isTrendy && <span className="bg-rose-500 text-white text-[10px] uppercase tracking-wider font-extrabold px-3 py-1.5 rounded-full shadow-sm">Popular</span>}
-                        {service.isSeasonal && <span className="bg-sky-500 text-white text-[10px] uppercase tracking-wider font-extrabold px-3 py-1.5 rounded-full shadow-sm">Seasonal</span>}
-                      </div>
-                    )}
+                    {/* Heavy overlays to ensure text readability on ANY image (light or dark) */}
+                    <div className="absolute inset-0 bg-slate-950/40 group-hover:bg-slate-950/50 transition-colors duration-300"></div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-900/80 to-transparent"></div>
                   </div>
                   
                   {/* Content Section */}
-                  <div className="p-6 flex flex-col flex-grow relative z-10 bg-white">
-                    <h4 className="text-slate-900 font-bold text-xl mb-2 group-hover:text-sky-600 transition-colors line-clamp-1">
+                  <div className="p-4 sm:p-5 flex flex-col flex-grow relative z-10 w-full h-full text-white">
+                    {/* Badges */}
+                    {(service.isTrendy || service.isSeasonal) && (
+                      <div className="absolute top-4 right-4 flex gap-2 z-10">
+                        {service.isTrendy && <span className="bg-rose-500/90 backdrop-blur-md text-white text-[10px] uppercase tracking-wider font-extrabold px-2.5 py-1 rounded shadow-sm">Popular</span>}
+                        {service.isSeasonal && <span className="bg-sky-500/90 backdrop-blur-md text-white text-[10px] uppercase tracking-wider font-extrabold px-2.5 py-1 rounded shadow-sm">Seasonal</span>}
+                      </div>
+                    )}
+
+                    <h4 className="font-bold text-lg sm:text-xl leading-tight mb-1 group-hover:text-blue-300 transition-colors line-clamp-2 drop-shadow-lg pr-16 text-white min-h-[1.5rem]">
                       {service.title}
                     </h4>
                     
-                    <p className="text-slate-500 text-sm leading-relaxed mb-6 line-clamp-2 flex-grow">
-                      {service.description}
+                    <p className="text-slate-200 text-xs sm:text-sm leading-snug mb-4 line-clamp-2 drop-shadow flex-grow font-medium">
+                      {service.description ? `- ${service.description}` : ''}
                     </p>
                     
-                    <div className="flex items-center justify-between pt-5 border-t border-slate-100 mt-auto">
-                      <div className="flex flex-col">
-                        <div className="flex items-center gap-2 mb-1">
+                    <div className="flex items-end justify-between mt-auto w-full pt-3">
+                      <div className="flex flex-col gap-1.5">
+                        <div className="flex items-center gap-2">
                           {service.discountPrice ? (
                             <>
-                              <span className="text-xs text-slate-400 line-through font-medium">Rs.{service.discountPrice}</span>
-                              <span className="text-lg font-black text-sky-600">Rs.{service.price}</span>
+                              <span className="text-xs sm:text-sm text-slate-400 line-through font-medium">Rs.{service.discountPrice}</span>
+                              <span className="text-lg sm:text-xl font-black text-white drop-shadow-md">Rs.{service.price}</span>
                             </>
                           ) : (
-                            <span className="text-lg font-black text-sky-600">Rs.{service.price}</span>
+                            <span className="text-lg sm:text-xl font-black text-white drop-shadow-md">Rs.{service.price}</span>
                           )}
                         </div>
-                        <div className="flex items-center gap-1.5 text-xs font-bold text-slate-600">
-                          <Star className="w-4 h-4 text-amber-400 fill-amber-400" /> 
+                        <div className="flex items-center gap-1 text-[11px] font-bold text-amber-400 bg-black/40 px-2 py-0.5 rounded backdrop-blur-md w-fit border border-white/10">
+                          <Star className="w-3.5 h-3.5 fill-amber-400" /> 
                           <span>{service.rating}</span>
                         </div>
                       </div>
                       
-                      <div className="flex items-center justify-center w-10 h-10 bg-sky-50 text-sky-600 rounded-full group-hover:bg-sky-500 group-hover:text-white transition-colors shrink-0">
-                        <ArrowRight className="w-5 h-5" />
+                      <div className="flex items-center justify-center bg-white text-slate-900 border-2 border-white hover:bg-transparent hover:text-white rounded-lg px-4 py-1.5 font-bold transition-all shadow-lg group-hover:scale-105 duration-200">
+                        Add <span className="ml-1 text-lg leading-none">+</span>
                       </div>
                     </div>
                   </div>

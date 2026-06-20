@@ -120,68 +120,66 @@ export default function ServicesSection({ showHomeOnly = false }: { showHomeOnly
             <p className="text-slate-500">We couldn't find any services in this category.</p>
           </div>
         ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 max-w-7xl mx-auto">
           {filteredAndSortedServices.map((service, idx) => (
             <Link 
               to={`/service/${service.slug}`}
               key={service.id}
-              className="group flex flex-col bg-white rounded-2xl overflow-hidden shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_8px_30px_rgb(0,0,0,0.12)] hover:-translate-y-1 transition-all duration-300 border border-slate-100"
+              className="group bg-white rounded-[20px] p-3 sm:p-4 flex gap-3 sm:gap-4 shadow-[0_2px_15px_rgb(0,0,0,0.04)] hover:shadow-[0_5px_20px_rgb(0,0,0,0.08)] transition-all duration-300 border border-slate-100 relative"
             >
-              {/* Image Section */}
-              <div className="relative h-56 w-full overflow-hidden shrink-0 bg-slate-100">
+              {/* Badges */}
+              {(service.isTrendy || service.isSeasonal) && (
+                <div className="absolute -top-3 right-4 flex gap-2 z-10">
+                   {service.isTrendy && <span className="bg-rose-500 text-white text-[10px] uppercase tracking-wider font-bold px-3 py-1 rounded-full shadow-sm">Popular</span>}
+                   {service.isSeasonal && <span className="bg-amber-500 text-white text-[10px] uppercase tracking-wider font-bold px-3 py-1 rounded-full shadow-sm">Seasonal</span>}
+                </div>
+              )}
+
+              <div className="w-[90px] h-[90px] sm:w-[110px] sm:h-[110px] shrink-0 rounded-2xl overflow-hidden bg-slate-100 relative flex items-center justify-center">
                 {service.imageUrl ? (
                   <img
                     src={service.imageUrl}
                     alt={service.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     referrerPolicy="no-referrer"
                   />
                 ) : (
                   <div className="w-full h-full bg-slate-200"></div>
                 )}
-                
-                {/* Overlay gradient for image (optional, just for top edge if we wanted) */}
-                <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/20 to-transparent z-0"></div>
-                  
-                {/* Badges - positioned professionally at top right */}
-                {(service.isTrendy || service.isSeasonal) && (
-                  <div className="absolute top-4 right-4 flex gap-2 z-10">
-                    {service.isTrendy && <span className="bg-rose-500 text-white text-[10px] uppercase tracking-wider font-extrabold px-3 py-1.5 rounded-full shadow-sm">Popular</span>}
-                    {service.isSeasonal && <span className="bg-sky-500 text-white text-[10px] uppercase tracking-wider font-extrabold px-3 py-1.5 rounded-full shadow-sm">Seasonal</span>}
-                  </div>
-                )}
               </div>
               
-              {/* Content Section */}
-              <div className="p-6 flex flex-col flex-grow relative z-10 bg-white">
-                <h4 className="text-slate-900 font-bold text-xl mb-2 group-hover:text-sky-600 transition-colors line-clamp-1">
-                  {service.title}
-                </h4>
+              <div className="flex flex-col flex-grow justify-between py-1 min-w-0">
+                <div>
+                  <h4 className="text-blue-600 font-medium text-base sm:text-[17px] leading-tight mb-1 transition-colors line-clamp-2">
+                    {service.title}
+                  </h4>
+                  <p className="text-slate-500 text-xs sm:text-[13px] font-medium line-clamp-1 mb-1.5 list-inside">
+                    - {service.description || "Vary After Inspection"}
+                  </p>
+                  
+                  <div className="flex items-center gap-2 mb-2">
+                    {service.discountPrice ? (
+                      <>
+                        <span className="text-xs text-slate-500 line-through font-semibold border-b border-transparent">Rs:{service.discountPrice}</span>
+                        <span className="text-sm font-bold text-slate-800">Rs:{service.price}</span>
+                      </>
+                    ) : (
+                      <span className="text-sm font-bold text-slate-800">Rs:{service.price}</span>
+                    )}
+                  </div>
+                </div>
                 
-                <p className="text-slate-500 text-sm leading-relaxed mb-6 line-clamp-2 flex-grow">
-                  {service.description}
-                </p>
-                
-                <div className="flex items-center justify-between pt-5 border-t border-slate-100 mt-auto">
-                  <div className="flex flex-col">
-                    <div className="flex items-center gap-2 mb-1">
-                      {service.discountPrice ? (
-                        <>
-                          <span className="text-xs text-slate-400 line-through font-medium">Rs.{service.discountPrice}</span>
-                          <span className="text-lg font-black text-sky-600">Rs.{service.price}</span>
-                        </>
-                      ) : (
-                        <span className="text-lg font-black text-sky-600">Rs.{service.price}</span>
-                      )}
-                    </div>
-                    <div className="flex items-center gap-1.5 text-xs font-bold text-slate-600">
-                      <Star className="w-4 h-4 text-amber-400 fill-amber-400" /> 
-                      <span>{service.rating}</span>
-                    </div>
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-1 text-[11px] font-bold text-amber-500 bg-amber-50/80 border border-amber-100 px-2 py-0.5 rounded-full">
+                    <Star className="w-3.5 h-3.5 fill-amber-500" /> 
+                    <span>{service.rating}</span>
                   </div>
                   
-                  <div className="flex items-center justify-center w-10 h-10 bg-sky-50 text-sky-600 rounded-full group-hover:bg-sky-500 group-hover:text-white transition-colors shrink-0">
-                    <ArrowRight className="w-5 h-5" />
+                  <div className="flex items-center justify-center bg-white text-slate-900 border border-slate-900 rounded-lg px-2.5 py-1 font-bold text-[13px] transition-all group-hover:bg-slate-50">
+                    Add 
+                    <div className="ml-1.5 bg-slate-900 text-white w-[18px] h-[18px] rounded flex items-center justify-center">
+                      <span className="text-[16px] leading-none -mt-0.5">+</span>
+                    </div>
                   </div>
                 </div>
               </div>
