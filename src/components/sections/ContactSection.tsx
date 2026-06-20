@@ -54,7 +54,7 @@ export default function ContactSection() {
           
           {/* Information */}
           <div className="lg:col-span-5 space-y-4">
-            <a href="https://wa.me/923034370011" target="_blank" rel="noreferrer" className="flex items-center gap-4 p-5 rounded-2xl border border-slate-100 bg-slate-50 hover:border-green-400 hover:bg-white hover:shadow-xl transition-all duration-300 group">
+            <a href="https://wa.me/923034370011?text=Hello!%20I%E2%80%99m%20looking%20for%20AC%20repair,%20electrician,%20or%20other%20home%20services.%20Please%20share%20details." target="_blank" rel="noreferrer" className="flex items-center gap-4 p-5 rounded-2xl border border-slate-100 bg-slate-50 hover:border-green-400 hover:bg-white hover:shadow-xl transition-all duration-300 group">
               <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center text-green-500 shadow-sm border border-slate-100 shrink-0 group-hover:scale-110 group-hover:bg-green-500 group-hover:text-white transition-all duration-300">
                 <MessageCircle className="w-6 h-6" />
               </div>

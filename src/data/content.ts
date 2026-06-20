@@ -90,22 +90,22 @@ export const areasServed = [
 export const testimonials = [
   {
     id: 1,
-    name: "Ahmad Raza",
+    name: "Mumtaz Ahmed",
     location: "Bahria Town Phase 7",
     review: "Incredible service! Called them for a sudden breakdown at night, and they fixed it within 2 hours. Very professional.",
     rating: 5
   },
   {
     id: 2,
-    name: "Sarah Khan",
-    location: "DHA Phase 2",
+    name: "Khalid Khan",
+    location: "E11-1 Islamabad",
     review: "The technicians were polite and handled the messy deep cleaning perfectly without ruining the wall paint. Highly recommended.",
     rating: 5
   },
   {
     id: 3,
-    name: "Usman Ali",
-    location: "Sector G-13",
+    name: "Sara Malik",
+    location: "Sector G-10 Islamabad",
     review: "Affordable and transparent pricing. They showed me exactly what was wrong before fixing it.",
     rating: 4
   }
