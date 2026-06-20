@@ -70,7 +70,9 @@ export default function Navbar() {
           <div className="flex items-center gap-6">
             <div className="flex items-center gap-2">
               <Phone className="w-3.5 h-3.5 text-sky-400" />
-              <a href="tel:+923034370011" className="hover:text-sky-300 transition">+92 303 4370011</a>
+              <a href="https://wa.me/923034370011?text=Hello!%20I%E2%80%99m%20looking%20for%20AC%20repair,%20electrician,%20or%20other%20home%20services.%20Please%20share%20details." 
+              target="_blank" rel="noopener"
+              className="hover:text-sky-300 transition">+92 303 4370011</a>
             </div>
             <div className="flex items-center gap-2">
               <Mail className="w-3.5 h-3.5 text-sky-400" />

@@ -23,7 +23,7 @@ export default function AboutWhoWeAre() {
             {/* Bottom Image (Left) */}
             <div className="mt-auto h-[350px] lg:h-[400px]">
               <img 
-                src="https://images.pexels.com/photos/8293699/pexels-photo-8293699.jpeg" 
+                src="https://res.cloudinary.com/dmzoiq7yg/image/upload/v1781941142/IslamabadTechnician/gbnqul5pw6g30yktncxy.jpg" 
                 alt="Professional Technician" 
                 className="w-full h-full object-cover rounded-xl"
               />
@@ -48,7 +48,7 @@ export default function AboutWhoWeAre() {
               {/* Image Card */}
               <div className="h-[300px] sm:h-auto">
                 <img 
-                  src="https://images.pexels.com/photos/5463577/pexels-photo-5463577.jpeg" 
+                  src="https://res.cloudinary.com/dmzoiq7yg/image/upload/v1781944822/service-01-830x1000_qv8kjq.jpg" 
                   alt="Quality Work" 
                   className="w-full h-full object-cover rounded-xl"
                 />
