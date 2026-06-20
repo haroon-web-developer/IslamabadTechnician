@@ -56,7 +56,7 @@ export default function WhyChooseUs() {
                   className="rounded-t-full rounded-b-4xl overflow-hidden shadow-xl h-56 sm:h-80 border-4 border-white bg-white"
                 >
                   <img 
-                    src="public/whychoseus-1.jpg" 
+                    src="/whychoseus-1.jpg" 
                     alt="AC Repairing" 
                     loading="lazy"
                     className="w-full h-full object-cover hover:scale-110 transition-transform duration-700"
@@ -69,7 +69,7 @@ export default function WhyChooseUs() {
                   className="rounded-b-full rounded-t-4xl overflow-hidden shadow-xl h-56 sm:h-80 translate-y-8 sm:translate-y-12 border-4 border-white bg-white"
                 >
                   <img 
-                    src="public/whychoseus-2.jpg" 
+                    src="/whychoseus-2.jpg" 
                     alt="Electrician Fixing" 
                     loading="lazy"
                     className="w-full h-full object-cover hover:scale-110 transition-transform duration-700"

@@ -1,7 +1,8 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
-import { getFirestore, enableIndexedDbPersistence } from "firebase/firestore";
+import { getFirestore, initializeFirestore, persistentLocalCache, persistentMultipleTabManager } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
+import firebaseConfigTemp from '../../firebase-applet-config.json';
 
 const sanitize = (val: string | undefined | boolean) => {
   if (!val || typeof val !== 'string') return val as string;
@@ -9,31 +10,23 @@ const sanitize = (val: string | undefined | boolean) => {
 };
 
 const firebaseConfig = {
-  apiKey: sanitize((import.meta as any).env.VITE_FIREBASE_API_KEY),
-  authDomain: sanitize((import.meta as any).env.VITE_FIREBASE_AUTH_DOMAIN) || "islamabadtechnician-e8a44.firebaseapp.com",
-  projectId: sanitize((import.meta as any).env.VITE_FIREBASE_PROJECT_ID) || "islamabadtechnician-e8a44",
-  storageBucket: sanitize((import.meta as any).env.VITE_FIREBASE_STORAGE_BUCKET) || "islamabadtechnician-e8a44.firebasestorage.app",
-  messagingSenderId: sanitize((import.meta as any).env.VITE_FIREBASE_MESSAGING_SENDER_ID),
-  appId: sanitize((import.meta as any).env.VITE_FIREBASE_APP_ID)
+  ...firebaseConfigTemp,
+  // Add standard firebase fallbacks if missing
+  authDomain: firebaseConfigTemp.authDomain || "islamabadtechnician-e8a44.firebaseapp.com",
 };
 
 console.log(`🔥 Connected to Custom Firebase Project: ${firebaseConfig.projectId}`);
 
 export const app = initializeApp(firebaseConfig);
-export const db = getFirestore(app);
 
-// Enable offline persistence to speed up initial loads
-try {
-  enableIndexedDbPersistence(db).catch((err: any) => {
-    if (err.code == 'failed-precondition') {
-      console.warn("Multiple tabs open, persistence can only be enabled in one tab at a a time.");
-    } else if (err.code == 'unimplemented') {
-      console.warn("The current browser does not support all of the features required to enable persistence");
-    }
-  });
-} catch (e) {
-  console.warn("Persistence setup error:", e);
-}
+// Initialize Firestore with persistent cache to avoid deprecation warnings
+export const db = initializeFirestore(app, {
+  localCache: persistentLocalCache({
+    tabManager: persistentMultipleTabManager()
+  }),
+  // @ts-ignore - Handle possible type mismatch for databaseId if it's missing in some firebase versions
+  databaseId: firebaseConfigTemp.firestoreDatabaseId
+});
 
 export const auth = getAuth(app);
 export let storage: any = null;
