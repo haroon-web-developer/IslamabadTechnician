@@ -1,22 +1,40 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { ServiceItem } from './Admin';
-import { services as categories } from '../data/content';
-import { ArrowLeft, ArrowRight, CheckCircle2 } from 'lucide-react';
+import { CategoryItem } from '../components/admin/AdminCategories';
+import { ArrowLeft, CheckCircle2, Star } from 'lucide-react';
 import ContactSection from '../components/sections/ContactSection';
-import { collection, onSnapshot } from 'firebase/firestore';
+import { collection, onSnapshot, query, where, getDocs } from 'firebase/firestore';
 import { db } from '../lib/firebase';
 
 export default function CategoryDetail() {
   const { categorySlug } = useParams();
   const [categoryServices, setCategoryServices] = useState<ServiceItem[]>([]);
+  const [currentCategory, setCurrentCategory] = useState<CategoryItem | null>(null);
   const [loading, setLoading] = useState(true);
-
-  const currentCategory = categories.find(c => c.slug === categorySlug);
+  const navigate = useNavigate();
 
   useEffect(() => {
     window.scrollTo(0, 0);
+    if (!categorySlug) return;
+    
+    // Fetch this category
+    const fetchCategory = async () => {
+      try {
+        const q = query(collection(db, 'categories'), where('slug', '==', categorySlug));
+        const snap = await getDocs(q);
+        if (!snap.empty) {
+          setCurrentCategory({ id: snap.docs[0].id, ...snap.docs[0].data() } as CategoryItem);
+        } else {
+          setCurrentCategory(null);
+        }
+      } catch (err) {
+        console.error(err);
+      }
+    };
+    fetchCategory();
+
     const unsubscribe = onSnapshot(collection(db, 'services'), (snapshot) => {
       let list: ServiceItem[] = [];
       snapshot.forEach(doc => {
@@ -172,67 +190,66 @@ export default function CategoryDetail() {
               </div>
             </div>
           ) : (
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
               {categoryServices.map(service => (
                 <Link 
                   to={`/service/${service.slug}`}
                   key={service.id}
-                  className="group relative flex flex-col rounded-2xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 border border-slate-200/20 w-full min-h-[180px] sm:min-h-[220px]"
+                  className="group bg-white rounded-[20px] p-3 sm:p-4 flex gap-3 sm:gap-4 shadow-[0_2px_15px_rgb(0,0,0,0.04)] hover:shadow-[0_5px_20px_rgb(0,0,0,0.08)] transition-all duration-300 border border-slate-100 relative"
                 >
-                  <div className="absolute inset-0 w-full h-full z-0 overflow-hidden bg-slate-900">
+                  {/* Badges */}
+                  {(service.isTrendy || service.isSeasonal) && (
+                    <div className="absolute -top-3 right-4 flex gap-2 z-10">
+                       {service.isTrendy && <span className="bg-rose-500 text-white text-[10px] uppercase tracking-wider font-bold px-3 py-1 rounded-full shadow-sm">Popular</span>}
+                       {service.isSeasonal && <span className="bg-amber-500 text-white text-[10px] uppercase tracking-wider font-bold px-3 py-1 rounded-full shadow-sm">Seasonal</span>}
+                    </div>
+                  )}
+
+                  <div className="w-[90px] h-[90px] sm:w-[110px] sm:h-[110px] shrink-0 rounded-2xl overflow-hidden bg-slate-100 relative flex items-center justify-center">
                     {service.imageUrl ? (
                       <img
                         src={service.imageUrl}
                         alt={service.title}
-                        className="w-full h-full object-cover opacity-60 group-hover:scale-110 transition-transform duration-700"
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                         referrerPolicy="no-referrer"
                       />
                     ) : (
-                      <div className="w-full h-full bg-slate-800"></div>
+                      <div className="w-full h-full bg-slate-200"></div>
                     )}
-                    {/* Heavy overlays to ensure text readability on ANY image (light or dark) */}
-                    <div className="absolute inset-0 bg-slate-950/40 group-hover:bg-slate-950/50 transition-colors duration-300"></div>
-                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-900/80 to-transparent"></div>
                   </div>
                   
-                  {/* Content Section */}
-                  <div className="p-4 sm:p-5 flex flex-col flex-grow relative z-10 w-full h-full text-white">
-                    {/* Badges */}
-                    {(service.isTrendy || service.isSeasonal) && (
-                      <div className="absolute top-4 right-4 flex gap-2 z-10">
-                        {service.isTrendy && <span className="bg-rose-500/90 backdrop-blur-md text-white text-[10px] uppercase tracking-wider font-extrabold px-2.5 py-1 rounded shadow-sm">Popular</span>}
-                        {service.isSeasonal && <span className="bg-sky-500/90 backdrop-blur-md text-white text-[10px] uppercase tracking-wider font-extrabold px-2.5 py-1 rounded shadow-sm">Seasonal</span>}
+                  <div className="flex flex-col flex-grow justify-between py-1 min-w-0">
+                    <div>
+                      <h4 className="text-blue-600 font-medium text-base sm:text-[17px] leading-tight mb-1 transition-colors line-clamp-2">
+                        {service.title}
+                      </h4>
+                      <p className="text-slate-500 text-xs sm:text-[13px] font-medium line-clamp-1 mb-1.5 list-inside">
+                        - {service.description || "Vary After Inspection"}
+                      </p>
+                      
+                      <div className="flex items-center gap-2 mb-2">
+                        {service.discountPrice ? (
+                          <>
+                            <span className="text-xs text-slate-500 line-through font-semibold border-b border-transparent">Rs:{service.discountPrice}</span>
+                            <span className="text-sm font-bold text-slate-800">Rs:{service.price}</span>
+                          </>
+                        ) : (
+                          <span className="text-sm font-bold text-slate-800">Rs:{service.price}</span>
+                        )}
                       </div>
-                    )}
-
-                    <h4 className="font-bold text-lg sm:text-xl leading-tight mb-1 group-hover:text-blue-300 transition-colors line-clamp-2 drop-shadow-lg pr-16 text-white min-h-[1.5rem]">
-                      {service.title}
-                    </h4>
+                    </div>
                     
-                    <p className="text-slate-200 text-xs sm:text-sm leading-snug mb-4 line-clamp-2 drop-shadow flex-grow font-medium">
-                      {service.description ? `- ${service.description}` : ''}
-                    </p>
-                    
-                    <div className="flex items-end justify-between mt-auto w-full pt-3">
-                      <div className="flex flex-col gap-1.5">
-                        <div className="flex items-center gap-2">
-                          {service.discountPrice ? (
-                            <>
-                              <span className="text-xs sm:text-sm text-slate-400 line-through font-medium">Rs.{service.discountPrice}</span>
-                              <span className="text-lg sm:text-xl font-black text-white drop-shadow-md">Rs.{service.price}</span>
-                            </>
-                          ) : (
-                            <span className="text-lg sm:text-xl font-black text-white drop-shadow-md">Rs.{service.price}</span>
-                          )}
-                        </div>
-                        <div className="flex items-center gap-1 text-[11px] font-bold text-amber-400 bg-black/40 px-2 py-0.5 rounded backdrop-blur-md w-fit border border-white/10">
-                          <Star className="w-3.5 h-3.5 fill-amber-400" /> 
-                          <span>{service.rating}</span>
-                        </div>
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-1 text-[11px] font-bold text-amber-500 bg-amber-50/80 border border-amber-100 px-2 py-0.5 rounded-full">
+                        <Star className="w-3.5 h-3.5 fill-amber-500" /> 
+                        <span>{service.rating}</span>
                       </div>
                       
-                      <div className="flex items-center justify-center bg-white text-slate-900 border-2 border-white hover:bg-transparent hover:text-white rounded-lg px-4 py-1.5 font-bold transition-all shadow-lg group-hover:scale-105 duration-200">
-                        Add <span className="ml-1 text-lg leading-none">+</span>
+                      <div className="flex items-center justify-center bg-white text-slate-900 border border-slate-900 rounded-lg px-2.5 py-1 font-bold text-[13px] transition-all group-hover:bg-slate-50">
+                        Add 
+                        <div className="ml-1.5 bg-slate-900 text-white w-[18px] h-[18px] rounded flex items-center justify-center">
+                          <span className="text-[16px] leading-none -mt-0.5">+</span>
+                        </div>
                       </div>
                     </div>
                   </div>

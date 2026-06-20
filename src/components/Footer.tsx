@@ -1,9 +1,27 @@
 import { Link } from 'react-router-dom';
 import { Facebook, Instagram, MapPin, Phone, Mail, Clock, ArrowRight } from 'lucide-react';
-import { services } from '../data/content';
+import { useState, useEffect } from 'react';
+import { collection, onSnapshot, query, limit } from 'firebase/firestore';
+import { db } from '../lib/firebase';
+import { CategoryItem } from './admin/AdminCategories';
 import Logo from './Logo';
 
 export default function Footer() {
+  const [categories, setCategories] = useState<CategoryItem[]>([]);
+
+  useEffect(() => {
+    const unsubCategories = onSnapshot(query(collection(db, 'categories'), limit(5)), (snapshot) => {
+      const list: CategoryItem[] = [];
+      snapshot.forEach(doc => {
+        list.push({ id: doc.id, ...doc.data() } as CategoryItem);
+      });
+      setCategories(list);
+    }, (error) => {
+      console.error("Error fetching categories:", error);
+    });
+    return () => unsubCategories();
+  }, []);
+
   return (
     <footer className="bg-blue-950 text-slate-300 pt-12 pb-8 shrink-0">
       <div className="container mx-auto px-4 lg:px-8">
@@ -62,11 +80,11 @@ export default function Footer() {
               <span className="w-1.5 h-1.5 bg-sky-500 rounded-full"></span> Our Services
             </h4>
             <ul className="space-y-3">
-              {services.slice(0, 5).map(service => (
-                <li key={service.id}>
-                  <Link to={`/services/${service.slug}`} className="text-sm text-slate-400 hover:text-sky-400 transition-colors flex items-center gap-2 group font-medium">
+              {categories.map(category => (
+                <li key={category.id}>
+                  <Link to={`/services/${category.slug}`} className="text-sm text-slate-400 hover:text-sky-400 transition-colors flex items-center gap-2 group font-medium">
                      <ArrowRight className="w-3 h-3 text-sky-500/50 group-hover:text-sky-400 -translate-x-2 opacity-0 group-hover:translate-x-0 group-hover:opacity-100 transition-all" /> 
-                    <span className="group-hover:translate-x-1 transition-transform">{service.title}</span>
+                    <span className="group-hover:translate-x-1 transition-transform">{category.title}</span>
                   </Link>
                 </li>
               ))}

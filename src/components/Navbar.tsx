@@ -1,13 +1,39 @@
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Phone, MessageCircle, ChevronDown, CheckCircle2, Zap, Droplet, AirVent, Mail, Clock } from 'lucide-react';
+import { Menu, X, Phone, MessageCircle, ChevronDown, Clock, Mail } from 'lucide-react';
 import { useState, useEffect } from 'react';
-import { services as categories } from '../data/content';
+import { collection, onSnapshot } from 'firebase/firestore';
+import { db } from '../lib/firebase';
+import { CategoryItem } from './admin/AdminCategories';
+import { services as defaultCategories } from '../data/content';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [categories, setCategories] = useState<CategoryItem[]>([]);
   const location = useLocation();
+
+  useEffect(() => {
+    const unsubCategories = onSnapshot(collection(db, 'categories'), (snapshot) => {
+      const list: CategoryItem[] = [];
+      snapshot.forEach(doc => {
+        list.push({ id: doc.id, ...doc.data() } as CategoryItem);
+      });
+      // Sort to match order or title
+      list.sort((a, b) => {
+        const indexA = defaultCategories.findIndex(c => c.slug === a.slug || c.title === a.title);
+        const indexB = defaultCategories.findIndex(c => c.slug === b.slug || c.title === b.title);
+        if (indexA !== -1 && indexB !== -1) return indexA - indexB;
+        if (indexA !== -1) return -1;
+        if (indexB !== -1) return 1;
+        return a.title.localeCompare(b.title);
+      });
+      setCategories(list);
+    }, (error) => {
+      console.error("Error fetching categories:", error);
+    });
+    return () => unsubCategories();
+  }, []);
 
   useEffect(() => {
     let ticking = false;

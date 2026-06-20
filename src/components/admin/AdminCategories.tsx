@@ -9,6 +9,7 @@ export interface CategoryItem {
   description: string;
   icon: string;
   slug: string;
+  features?: string[];
 }
 
 export default function AdminCategories({ showNotification }: { showNotification: (msg: string, type: 'success' | 'error' | 'info') => void }) {
