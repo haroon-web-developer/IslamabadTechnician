@@ -11,6 +11,7 @@ import ContactSection from '../components/sections/ContactSection';
 export default function Home() {
   return (
     <>
+      {/* Home Route Sections */}
       <Hero />
       <ServicesSection showHomeOnly={true} />
       <WhyChooseUs />

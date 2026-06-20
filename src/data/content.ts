@@ -112,20 +112,32 @@ export const testimonials = [
 ];
 
 export const faqs = [
-  {
-    question: "How much does routine AC service cost?",
-    answer: "Our standard maintenance and cleaning service starts from competitive rates depending on the AC capacity and condition. Contact us on WhatsApp for exact estimates."
+{
+    question: "Do you offer AC repair and installation services?",
+    answer: "Yes! We specialize in comprehensive AC services including installation, deep cleaning, gas refilling, and component repairs for all split and window air conditioners."
   },
   {
-    question: "Do you provide warranty on AC repairs?",
-    answer: "Yes, we provide a standard warranty on most of our replacement parts and repair work to ensure you have peace of mind."
+    question: "What kind of electrical services do you provide?",
+    answer: "Our certified electricians handle everything from minor wiring fixes and lighting installations to complete panel upgrades, short circuit repairs, and UPS/generator connection setups."
   },
   {
-    question: "How long does a new AC installation take?",
-    answer: "A standard split AC installation takes about 2-3 hours depending on the complexity of piping and site conditions."
+    question: "Can you fix plumbing leaks and install new fixtures?",
+    answer: "Absolutely. Our expert plumbers are equipped to detect and fix leaks, install new bathroom and kitchen fixtures, repair geysers (water heaters), and clear blocked drains quickly."
   },
   {
-    question: "What areas do you cover?",
-    answer: "We primarily cover Islamabad, Rawalpindi, Bahria Town, DHA, and all nearby sectors."
+    question: "Do you install and repair CCTV camera systems?",
+    answer: "Yes, we provide professional CCTV camera installation for homes and businesses. We also offer troubleshooting, DVR configuration, and repair services for existing security systems."
+  },
+  {
+    question: "Do you offer solar panel cleaning and maintenance?",
+    answer: "We offer professional solar panel cleaning to ensure maximum efficiency. We use specialized equipment that safely removes dust and debris without damaging the delicate panel surfaces."
+  },
+  {
+    question: "Do you deal with other home appliances?",
+    answer: "Yes, our technicians are trained to repair all major home appliances, including refrigerators, freezers, washing machines, microwaves, and ovens."
+  },
+  {
+    question: "Which areas do your technicians cover?",
+    answer: "We strictly serve all major sectors of Islamabad and Rawalpindi, offering reliable and timely services to your doorstep."
   }
 ];
