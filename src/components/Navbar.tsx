@@ -193,7 +193,9 @@ export default function Navbar() {
               </div>
               <div className="flex flex-col">
                 <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Call for support</span>
-                <span className="text-sm font-black text-blue-900">+92 303 4370011</span>
+                <a href="https://wa.me/923034370011?text=Hello!%20I%E2%80%99m%20looking%20for%20AC%20repair,%20electrician,%20or%20other%20home%20services.%20Please%20share%20details." target="_blank" rel="noreferrer" className="text-sm font-black text-blue-900">
+                  +92 303 4370011
+                </a>
               </div>
             </div>
 
@@ -254,7 +256,7 @@ export default function Navbar() {
             <a href="tel:+923034370011" className="w-full flex items-center justify-center gap-2 py-3.5 bg-blue-900 text-white font-bold rounded-md uppercase text-sm tracking-wide">
               <Phone className="w-4 h-4" /> Call Us Now
             </a>
-            <a href="https://wa.me/923034370011" target="_blank" rel="noreferrer" className="w-full flex items-center justify-center gap-2 py-3.5 rounded-md bg-[#25D366] text-white font-bold uppercase text-sm tracking-wide">
+            <a href="https://wa.me/923034370011?text=Hello!%20I%E2%80%99m%20looking%20for%20AC%20repair,%20electrician,%20or%20other%20home%20services.%20Please%20share%20details." target="_blank" rel="noreferrer" className="w-full flex items-center justify-center gap-2 py-3.5 rounded-md bg-[#25D366] text-white font-bold uppercase text-sm tracking-wide">
               <MessageCircle className="w-4 h-4" /> Chat on WhatsApp
             </a>
           </div>
