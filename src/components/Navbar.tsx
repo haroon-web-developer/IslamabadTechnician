@@ -253,7 +253,7 @@ export default function Navbar() {
           </nav>
           
           <div className="mt-auto bg-slate-50 p-6 flex flex-col gap-3">
-            <a href="tel:+923034370011" className="w-full flex items-center justify-center gap-2 py-3.5 bg-blue-900 text-white font-bold rounded-md uppercase text-sm tracking-wide">
+            <a href="https://wa.me/923034370011?text=Hello!%20I%E2%80%99m%20looking%20for%20AC%20repair,%20electrician,%20or%20other%20home%20services.%20Please%20share%20details." className="w-full flex items-center justify-center gap-2 py-3.5 bg-blue-900 text-white font-bold rounded-md uppercase text-sm tracking-wide">
               <Phone className="w-4 h-4" /> Call Us Now
             </a>
             <a href="https://wa.me/923034370011?text=Hello!%20I%E2%80%99m%20looking%20for%20AC%20repair,%20electrician,%20or%20other%20home%20services.%20Please%20share%20details." target="_blank" rel="noreferrer" className="w-full flex items-center justify-center gap-2 py-3.5 rounded-md bg-[#25D366] text-white font-bold uppercase text-sm tracking-wide">
