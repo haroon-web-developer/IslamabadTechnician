@@ -27,7 +27,7 @@ export default function AdminServices() {
   const [formData, setFormData] = useState<Partial<ServiceItem>>({});
   const [uploading, setUploading] = useState(false);
 
-  const [activeTab, setActiveTab] = useState<'services' | 'categories'>('categories');
+  const [activeTab, setActiveTab] = useState<'services' | 'categories'>('services');
   const [categories, setCategories] = useState<CategoryItem[]>([]);
 
   // Auth states
@@ -363,16 +363,16 @@ export default function AdminServices() {
 
       <div className="mb-8 flex gap-2 border-b border-slate-200">
         <button 
-          onClick={() => setActiveTab('categories')}
-          className={`px-6 py-3 font-bold text-sm tracking-wide border-b-2 transition-all ${activeTab === 'categories' ? 'border-blue-600 text-blue-600' : 'border-transparent text-slate-500 hover:text-slate-800'}`}
-        >
-          Manage Categories
-        </button>
-        <button 
           onClick={() => setActiveTab('services')}
           className={`px-6 py-3 font-bold text-sm tracking-wide border-b-2 transition-all ${activeTab === 'services' ? 'border-blue-600 text-blue-600' : 'border-transparent text-slate-500 hover:text-slate-800'}`}
         >
           Manage Services
+        </button>
+        <button 
+          onClick={() => setActiveTab('categories')}
+          className={`px-6 py-3 font-bold text-sm tracking-wide border-b-2 transition-all ${activeTab === 'categories' ? 'border-blue-600 text-blue-600' : 'border-transparent text-slate-500 hover:text-slate-800'}`}
+        >
+          Manage Categories
         </button>
       </div>
 

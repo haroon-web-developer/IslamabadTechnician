@@ -53,7 +53,7 @@ export default function Footer() {
 
           {/* Quick Links */}
           <div>
-            <h4 className="text-white font-bold text-lg mb-6 flex items-center gap-2">
+            <h4 className="!text-white font-bold text-lg mb-6 flex items-center gap-2">
               <span className="w-1.5 h-1.5 bg-sky-500 rounded-full"></span> Quick Links
             </h4>
             <ul className="space-y-3">
@@ -76,7 +76,7 @@ export default function Footer() {
 
           {/* Services */}
           <div>
-            <h4 className="text-white font-bold text-lg mb-6 flex items-center gap-2">
+            <h4 className="!text-white font-bold text-lg mb-6 flex items-center gap-2">
               <span className="w-1.5 h-1.5 bg-sky-500 rounded-full"></span> Our Services
             </h4>
             <ul className="space-y-3">
@@ -93,7 +93,7 @@ export default function Footer() {
 
           {/* Contact */}
           <div>
-            <h4 className="text-white font-bold text-lg mb-6 flex items-center gap-2">
+            <h4 className="!text-white font-bold text-lg mb-6 flex items-center gap-2">
               <span className="w-1.5 h-1.5 bg-sky-500 rounded-full"></span> Contact Us
             </h4>
             <ul className="space-y-4">
