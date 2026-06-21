@@ -120,72 +120,86 @@ export default function ServicesSection({ showHomeOnly = false }: { showHomeOnly
             <p className="text-slate-500">We couldn't find any services in this category.</p>
           </div>
         ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 max-w-7xl mx-auto">
-          {filteredAndSortedServices.map((service, idx) => (
-            <Link 
-              to={`/service/${service.slug}`}
-              key={service.id}
-              className="group bg-white rounded-[20px] p-3 sm:p-4 flex gap-3 sm:gap-4 shadow-[0_2px_15px_rgb(0,0,0,0.04)] hover:shadow-[0_5px_20px_rgb(0,0,0,0.08)] transition-all duration-300 border border-slate-100 relative"
-            >
-              {/* Badges */}
-              {(service.isTrendy || service.isSeasonal) && (
-                <div className="absolute -top-3 right-4 flex gap-2 z-10">
-                   {service.isTrendy && <span className="bg-rose-500 text-white text-[10px] uppercase tracking-wider font-bold px-3 py-1 rounded-full shadow-sm">Popular</span>}
-                   {service.isSeasonal && <span className="bg-amber-500 text-white text-[10px] uppercase tracking-wider font-bold px-3 py-1 rounded-full shadow-sm">Seasonal</span>}
-                </div>
-              )}
+          <>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 max-w-7xl mx-auto">
+              {(showHomeOnly ? filteredAndSortedServices.slice(0, 6) : filteredAndSortedServices).map((service, idx) => (
+                <Link 
+                  to={`/service/${service.slug}`}
+                  key={service.id}
+                  className="group bg-white rounded-[20px] p-3 sm:p-4 flex gap-3 sm:gap-4 shadow-[0_2px_15px_rgb(0,0,0,0.04)] hover:shadow-[0_5px_20px_rgb(0,0,0,0.08)] transition-all duration-300 border border-slate-100 relative"
+                >
+                  {/* Badges */}
+                  {(service.isTrendy || service.isSeasonal) && (
+                    <div className="absolute -top-3 right-4 flex gap-2 z-10">
+                       {service.isTrendy && <span className="bg-rose-500 text-white text-[10px] uppercase tracking-wider font-bold px-3 py-1 rounded-full shadow-sm">Popular</span>}
+                       {service.isSeasonal && <span className="bg-amber-500 text-white text-[10px] uppercase tracking-wider font-bold px-3 py-1 rounded-full shadow-sm">Seasonal</span>}
+                    </div>
+                  )}
 
-              <div className="w-[90px] h-[90px] sm:w-[110px] sm:h-[110px] shrink-0 rounded-2xl overflow-hidden bg-slate-100 relative flex items-center justify-center">
-                {service.imageUrl ? (
-                  <img
-                    src={service.imageUrl}
-                    alt={service.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    referrerPolicy="no-referrer"
-                  />
-                ) : (
-                  <div className="w-full h-full bg-slate-200"></div>
-                )}
-              </div>
-              
-              <div className="flex flex-col flex-grow justify-between py-1 min-w-0">
-                <div>
-                  <h4 className="text-blue-600 font-medium text-base sm:text-[17px] leading-tight mb-1 transition-colors line-clamp-2">
-                    {service.title}
-                  </h4>
-                  <p className="text-slate-500 text-xs sm:text-[13px] font-medium line-clamp-1 mb-1.5 list-inside">
-                    - {service.description || "Vary After Inspection"}
-                  </p>
-                  
-                  <div className="flex items-center gap-2 mb-2">
-                    {service.discountPrice ? (
-                      <>
-                        <span className="text-xs text-slate-500 line-through font-semibold border-b border-transparent">Rs:{service.discountPrice}</span>
-                        <span className="text-sm font-bold text-slate-800">Rs:{service.price}</span>
-                      </>
+                  <div className="w-[90px] h-[90px] sm:w-[110px] sm:h-[110px] shrink-0 rounded-2xl overflow-hidden bg-slate-100 relative flex items-center justify-center">
+                    {service.imageUrl ? (
+                      <img
+                        src={service.imageUrl}
+                        alt={service.title}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        referrerPolicy="no-referrer"
+                      />
                     ) : (
-                      <span className="text-sm font-bold text-slate-800">Rs:{service.price}</span>
+                      <div className="w-full h-full bg-slate-200"></div>
                     )}
                   </div>
-                </div>
-                
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-1 text-[11px] font-bold text-amber-500 bg-amber-50/80 border border-amber-100 px-2 py-0.5 rounded-full">
-                    <Star className="w-3.5 h-3.5 fill-amber-500" /> 
-                    <span>{service.rating}</span>
-                  </div>
                   
-                  <div className="flex items-center justify-center bg-white text-slate-900 border border-slate-900 rounded-lg px-2.5 py-1 font-bold text-[13px] transition-all group-hover:bg-slate-50">
-                    Add 
-                    <div className="ml-1.5 bg-slate-900 text-white w-[18px] h-[18px] rounded flex items-center justify-center">
-                      <span className="text-[16px] leading-none -mt-0.5">+</span>
+                  <div className="flex flex-col flex-grow justify-between py-1 min-w-0">
+                    <div>
+                      <h4 className="text-blue-600 font-medium text-base sm:text-[17px] leading-tight mb-1 transition-colors line-clamp-2">
+                        {service.title}
+                      </h4>
+                      <p className="text-slate-500 text-xs sm:text-[13px] font-medium line-clamp-1 mb-1.5 list-inside">
+                        - {service.description || "Vary After Inspection"}
+                      </p>
+                      
+                      <div className="flex items-center gap-2 mb-2">
+                        {service.discountPrice ? (
+                          <>
+                            <span className="text-xs text-slate-500 line-through font-semibold border-b border-transparent">Rs:{service.discountPrice}</span>
+                            <span className="text-sm font-bold text-slate-800">Rs:{service.price}</span>
+                          </>
+                        ) : (
+                          <span className="text-sm font-bold text-slate-800">Rs:{service.price}</span>
+                        )}
+                      </div>
+                    </div>
+                    
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-1 text-[11px] font-bold text-amber-500 bg-amber-50/80 border border-amber-100 px-2 py-0.5 rounded-full">
+                        <Star className="w-3.5 h-3.5 fill-amber-500" /> 
+                        <span>{service.rating}</span>
+                      </div>
+                      
+                      <div className="flex items-center justify-center bg-white text-slate-900 border border-slate-900 rounded-lg px-2.5 py-1 font-bold text-[13px] transition-all group-hover:bg-slate-50">
+                        Add 
+                        <div className="ml-1.5 bg-slate-900 text-white w-[18px] h-[18px] rounded flex items-center justify-center">
+                          <span className="text-[16px] leading-none -mt-0.5">+</span>
+                        </div>
+                      </div>
                     </div>
                   </div>
-                </div>
+                </Link>
+              ))}
+            </div>
+            
+            {showHomeOnly && filteredAndSortedServices.length > 6 && (
+              <div className="mt-12 text-center">
+                <Link 
+                  to="/services" 
+                  className="inline-flex items-center justify-center gap-2 px-8 py-3.5 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5"
+                >
+                  See More Services
+                  <ArrowRight className="w-5 h-5" />
+                </Link>
               </div>
-            </Link>
-          ))}
-        </div>
+            )}
+          </>
         )}
       </div>
     </section>

@@ -1,20 +1,48 @@
 import { ArrowRight, ShieldCheck, Clock, PhoneCall, CheckCircle } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { motion } from 'motion/react';
+import { motion, AnimatePresence } from 'motion/react';
+import { useState, useEffect } from 'react';
+
+const SLIDER_IMAGES = [
+  '/ac.png',
+  '/electricalwork.jpg',
+  '/plumbing.jpg',
+  '/appliance.jpg'
+];
 
 export default function Hero() {
+  const [currentImage, setCurrentImage] = useState(0);
+
+  useEffect(() => {
+    // Preload images for better performance
+    SLIDER_IMAGES.forEach((src) => {
+      const img = new Image();
+      img.src = src;
+    });
+
+    const interval = setInterval(() => {
+      setCurrentImage((prev) => (prev + 1) % SLIDER_IMAGES.length);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <section className="relative w-full h-[500px] sm:h-[600px] lg:h-[700px] overflow-hidden group bg-slate-100">
       
-      {/* Background Image - Highly Optimized Single Image */}
-      <div className="absolute inset-0 w-full h-full z-0">
-        <img 
-          src="/ac.png" 
-          alt="Expert Home Maintenance" 
-          loading="eager"
-          fetchPriority="high"
-          className="w-full h-full object-cover origin-center opacity-40 sm:opacity-50"
-        />
+      {/* Background Image Slider - Highly Optimized */}
+      <div className="absolute inset-0 w-full h-full z-0 opacity-30 sm:opacity-40">
+        <AnimatePresence>
+          <motion.img
+            key={currentImage}
+            src={SLIDER_IMAGES[currentImage]}
+            alt="Expert Home Maintenance"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 1.5, ease: "easeInOut" }}
+            className="absolute inset-0 w-full h-full object-cover origin-center"
+          />
+        </AnimatePresence>
       </div>
 
       {/* Light Overlay */}
