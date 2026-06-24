@@ -42,10 +42,10 @@ export default function Footer() {
               Professional home maintenance, AC repair, plumbing, and cleaning services across Islamabad and Rawalpindi. Trusted by homeowners and businesses.
             </p>
             <div className="flex gap-3 pt-2">
-              <a href="https://www.facebook.com/share/1Kyu4hq33s/?mibextid=wwXIfr" className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-sky-500 hover:text-white hover:border-transparent transition-all text-slate-400 shadow-sm">
+              <a href="#" className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-sky-500 hover:text-white hover:border-transparent transition-all text-slate-400 shadow-sm">
                 <Facebook className="w-4 h-4" />
               </a>
-              <a href="https://www.instagram.com/capital.fixers?igsh=NzhqMmdtYW0yMndl&utm_source=qr" className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-sky-500 hover:text-white hover:border-transparent transition-all text-slate-400 shadow-sm">
+              <a href="#" className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-sky-500 hover:text-white hover:border-transparent transition-all text-slate-400 shadow-sm">
                 <Instagram className="w-4 h-4" />
               </a>
             </div>

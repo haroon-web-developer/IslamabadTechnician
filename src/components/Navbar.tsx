@@ -70,9 +70,7 @@ export default function Navbar() {
           <div className="flex items-center gap-6">
             <div className="flex items-center gap-2">
               <Phone className="w-3.5 h-3.5 text-sky-400" />
-              <a href="https://wa.me/923034370011?text=Hello!%20I%E2%80%99m%20looking%20for%20AC%20repair,%20electrician,%20or%20other%20home%20services.%20Please%20share%20details." 
-              target="_blank" rel="noopener"
-              className="hover:text-sky-300 transition">+92 303 4370011</a>
+              <a href="tel:+923034370011" className="hover:text-sky-300 transition">+92 303 4370011</a>
             </div>
             <div className="flex items-center gap-2">
               <Mail className="w-3.5 h-3.5 text-sky-400" />
@@ -193,9 +191,7 @@ export default function Navbar() {
               </div>
               <div className="flex flex-col">
                 <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Call for support</span>
-                <a href="https://wa.me/923034370011?text=Hello!%20I%E2%80%99m%20looking%20for%20AC%20repair,%20electrician,%20or%20other%20home%20services.%20Please%20share%20details." target="_blank" rel="noreferrer" className="text-sm font-black text-blue-900">
-                  +92 303 4370011
-                </a>
+                <span className="text-sm font-black text-blue-900">+92 303 4370011</span>
               </div>
             </div>
 
@@ -203,14 +199,26 @@ export default function Navbar() {
               Get A Quote
             </a>
 
-            {/* Mobile Menu Toggle */}
-            <button 
-              className="lg:hidden p-2 text-blue-900 hover:text-sky-500 transition-colors focus:outline-none"
-              onClick={() => setIsOpen(!isOpen)}
-              aria-label="Toggle menu"
-            >
-              {isOpen ? <X className="w-7 h-7" /> : <Menu className="w-7 h-7" />}
-            </button>
+            {/* Mobile Actions (Phone & Menu Toggle) */}
+            <div className="flex items-center gap-2 lg:hidden">
+              <a 
+                href="https://wa.me/923034370011?text=Hello!%20I%E2%80%99m%20looking%20for%20AC%20repair,%20electrician,%20or%20other%20home%20services.%20Please%20share%20details." 
+                target="_blank" 
+                rel="noreferrer" 
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#25D366]/10 text-[#25D366] hover:bg-[#25D366] hover:text-white transition-colors"
+                aria-label="WhatsApp Us"
+              >
+                <MessageCircle className="w-4 h-4" />
+                <span className="text-xs font-bold whitespace-nowrap">0303 4370011</span>
+              </a>
+              <button 
+                className="p-2 text-blue-900 hover:text-sky-500 transition-colors focus:outline-none"
+                onClick={() => setIsOpen(!isOpen)}
+                aria-label="Toggle menu"
+              >
+                {isOpen ? <X className="w-7 h-7" /> : <Menu className="w-7 h-7" />}
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -253,10 +261,10 @@ export default function Navbar() {
           </nav>
           
           <div className="mt-auto bg-slate-50 p-6 flex flex-col gap-3">
-            <a href="https://wa.me/923034370011?text=Hello!%20I%E2%80%99m%20looking%20for%20AC%20repair,%20electrician,%20or%20other%20home%20services.%20Please%20share%20details." className="w-full flex items-center justify-center gap-2 py-3.5 bg-blue-900 text-white font-bold rounded-md uppercase text-sm tracking-wide">
+            <a href="tel:+923034370011" className="w-full flex items-center justify-center gap-2 py-3.5 bg-blue-900 text-white font-bold rounded-md uppercase text-sm tracking-wide">
               <Phone className="w-4 h-4" /> Call Us Now
             </a>
-            <a href="https://wa.me/923034370011?text=Hello!%20I%E2%80%99m%20looking%20for%20AC%20repair,%20electrician,%20or%20other%20home%20services.%20Please%20share%20details." target="_blank" rel="noreferrer" className="w-full flex items-center justify-center gap-2 py-3.5 rounded-md bg-[#25D366] text-white font-bold uppercase text-sm tracking-wide">
+            <a href="https://wa.me/923034370011" target="_blank" rel="noreferrer" className="w-full flex items-center justify-center gap-2 py-3.5 rounded-md bg-[#25D366] text-white font-bold uppercase text-sm tracking-wide">
               <MessageCircle className="w-4 h-4" /> Chat on WhatsApp
             </a>
           </div>
