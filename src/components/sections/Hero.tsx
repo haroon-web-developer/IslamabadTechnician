@@ -36,11 +36,12 @@ export default function Hero() {
             key={currentImage}
             src={SLIDER_IMAGES[currentImage]}
             alt="Expert Home Maintenance"
-            initial={{ opacity: 0 }}
+            initial={currentImage === 0 ? false : { opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 1.5, ease: "easeInOut" }}
             className="absolute inset-0 w-full h-full object-cover origin-center"
+            fetchPriority={currentImage === 0 ? "high" : "auto"}
           />
         </AnimatePresence>
       </div>
@@ -66,10 +67,10 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="text-4xl sm:text-5xl lg:text-6xl xl:text-[4.5rem] font-black text-[#172e3e] leading-[1.1] mb-3 sm:mb-5 tracking-tight"
+              className="text-4xl sm:text-5xl lg:text-6xl xl:text-[4rem] font-black text-[#172e3e] leading-[1.1] mb-3 sm:mb-5 tracking-tight"
             >
-              Expert Home Services <br className="hidden sm:block"/>
-              <span className="text-[#d9a651] text-3xl sm:text-4xl lg:text-5xl drop-shadow-sm">For Your Modern Home.</span>
+              Expert Home Maintenance & <br className="hidden sm:block"/>
+              <span className="text-[#d9a651] text-3xl sm:text-4xl lg:text-[3.5rem] drop-shadow-sm">AC Repair Services in Islamabad.</span>
             </motion.h1>
             
             <motion.p 

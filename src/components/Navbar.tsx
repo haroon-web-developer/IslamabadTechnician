@@ -92,9 +92,9 @@ export default function Navbar() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
           
           {/* Logo Section */}
-          <Link to="/" className="flex items-center space-x-2 sm:space-x-3 group relative z-10 shrink-0">
+          <Link to="/" className="flex items-center space-x-1.5 sm:space-x-3 group relative z-10 shrink-0">
             {/* Mosque Graphic Abstraction */}
-            <div className="w-12 h-12 sm:w-14 sm:h-14 relative flex-shrink-0 bg-gradient-to-b from-[#e0b462] to-[#d4a048] rounded-full overflow-hidden shadow-sm flex items-center justify-center transform transition-transform group-hover:scale-105 duration-300">
+            <div className="w-10 h-10 sm:w-14 sm:h-14 relative flex-shrink-0 bg-gradient-to-b from-[#e0b462] to-[#d4a048] rounded-full overflow-hidden shadow-sm flex items-center justify-center transform transition-transform group-hover:scale-105 duration-300">
               <div className="absolute top-[18%] left-[40%] w-2.5 h-2.5 border-b-[2px] border-l-[2px] border-white rounded-full -rotate-[40deg]"></div>
               <div className="absolute top-[28%] left-[55%] w-[2px] h-[2px] bg-white rounded-full shadow-[0_0_2px_white]"></div>
               
@@ -124,15 +124,15 @@ export default function Navbar() {
               </svg>
             </div>
 
-            <div className="flex flex-col pt-0.5 max-w-[200px] sm:max-w-none">
-              <div className="flex items-end gap-2">
+            <div className="flex flex-col pt-0.5 max-w-[130px] sm:max-w-none">
+              <div className="flex items-end gap-1 sm:gap-2">
                 <div className="flex flex-col leading-[0.95]">
-                  <span className="text-[1.3rem] sm:text-[1.5rem] font-black italic text-[#172e3e] tracking-tight">Islamabad</span>
-                  <span className="text-[1rem] sm:text-[1.4rem] font-black italic text-[#1b5035] tracking-tight">Technician</span>
+                  <span className="text-[1.1rem] sm:text-[1.5rem] font-black italic text-[#172e3e] tracking-tight">Islamabad</span>
+                  <span className="text-[0.85rem] sm:text-[1.4rem] font-black italic text-[#1b5035] tracking-tight">Technician</span>
                 </div>
               </div>
               <div className="w-full h-[1.5px] bg-gradient-to-r from-[#172e3e] via-[#d9a651] to-[#1b5035] mt-1 mb-0.5"></div>
-              <span className="text-[0.4rem] sm:text-[0.5rem] font-extrabold text-[#172e3e] tracking-[0.12em] uppercase pl-0.5">
+              <span className="text-[0.35rem] sm:text-[0.5rem] font-extrabold text-[#172e3e] tracking-[0.12em] uppercase pl-0.5 whitespace-nowrap overflow-hidden text-ellipsis">
                 AC SERVICES <span className="text-[#1b5035] mx-0.5">•</span> ELECTRICAL <span className="text-[#1b5035] mx-0.5">•</span> PLUMBING
               </span>
             </div>
@@ -183,7 +183,7 @@ export default function Navbar() {
           </nav>
 
           {/* Right Action buttons */}
-          <div className="flex items-center gap-4 lg:ml-auto">
+          <div className="flex items-center gap-2 sm:gap-4 lg:ml-auto shrink-0">
             {/* Phone CTA hidden on mobile, shown on tablet/desktop */}
             <div className="hidden md:flex items-center gap-3">
               <div className="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center text-sky-500 shrink-0">
@@ -200,23 +200,23 @@ export default function Navbar() {
             </a>
 
             {/* Mobile Actions (Phone & Menu Toggle) */}
-            <div className="flex items-center gap-2 lg:hidden">
+            <div className="flex items-center gap-1.5 sm:gap-2 lg:hidden shrink-0">
               <a 
                 href="https://wa.me/923034370011?text=Hello!%20I%E2%80%99m%20looking%20for%20AC%20repair,%20electrician,%20or%20other%20home%20services.%20Please%20share%20details." 
                 target="_blank" 
                 rel="noreferrer" 
-                className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#25D366]/10 text-[#25D366] hover:bg-[#25D366] hover:text-white transition-colors"
+                className="group flex items-center gap-1 px-2.5 py-1.5 sm:px-3 sm:py-1.5 rounded-full bg-[#1b5035]/10 text-[#1b5035] hover:bg-[#1b5035] hover:text-white transition-colors"
                 aria-label="WhatsApp Us"
               >
-                <MessageCircle className="w-4 h-4" />
-                <span className="text-xs font-bold whitespace-nowrap">0303 4370011</span>
+                <MessageCircle className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
+                <span className="text-[10px] sm:text-xs font-bold whitespace-nowrap text-[#172e3e] group-hover:text-white">0303 4370011</span>
               </a>
               <button 
-                className="p-2 text-blue-900 hover:text-sky-500 transition-colors focus:outline-none"
+                className="p-1 sm:p-2 text-blue-900 hover:text-sky-500 transition-colors focus:outline-none shrink-0"
                 onClick={() => setIsOpen(!isOpen)}
                 aria-label="Toggle menu"
               >
-                {isOpen ? <X className="w-7 h-7" /> : <Menu className="w-7 h-7" />}
+                {isOpen ? <X className="w-6 h-6 sm:w-7 sm:h-7" /> : <Menu className="w-6 h-6 sm:w-7 sm:h-7" />}
               </button>
             </div>
           </div>
