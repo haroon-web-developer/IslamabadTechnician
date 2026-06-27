@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://islamabadtechnician.com/sitemap.xml
+Sitemap: https://www.islamabadtechnician.com/sitemap.xml
