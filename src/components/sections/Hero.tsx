@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import { useState, useEffect } from 'react';
 
 const SLIDER_IMAGES = [
+  '/geyser.jpg',
   '/ac.png',
   '/electricalwork.jpg',
   '/plumbing.jpg',
